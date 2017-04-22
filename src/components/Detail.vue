@@ -6,7 +6,10 @@
             <br/>
             Hash: {{ signature.hash }}
         </div>
-        <img :src="signature.image" class="screenshot center-block"/>
+        <img :src="signature.image" @click="$root.$emit('show::modal','screenshot')" class="screenshot center-block"/>
+        <b-modal id="screenshot" hide-header hide-footer hide-body>
+            <img :src="signature.image" class="center-block"/>
+        </b-modal>
         <b-card show-footer>
             <b-btn v-b-toggle.htmlCollapse class="collapser">Mostrar HTML</b-btn>
             <b-collapse id=htmlCollapse  class="text-left collapse">
@@ -81,6 +84,28 @@
     }
     .screenshot {
         margin: 30px 0px;
+    }
+
+    img {
         width: 100%;
     }
+
+</style>
+
+<style>
+    .modal-body {
+        padding: 0px !important;
+    }
+
+    .modal-dialog {
+        margin: auto !important;
+        width: 90% !important;
+        max-width: 90% !important;
+        -webkit-transform: translate(-50%,-50%) !important;
+        transform: translate(-50%,-50%) !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+    }
+
 </style>
