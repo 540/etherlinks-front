@@ -5,6 +5,7 @@ import BootstrapVue from 'bootstrap-vue'
 import VeeValidate from 'vee-validate'
 import validationLocaleEs from '../node_modules/vee-validate/dist/locale/es'
 
+import './assets/main.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'font-awesome/scss/font-awesome.scss'
@@ -27,5 +28,5 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: {App}
 })

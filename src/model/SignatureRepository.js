@@ -1,6 +1,3 @@
-/**
- * Created by mikel on 22/04/2017.
- */
 export default class SignatureRepository {
   findById (id) {
     return {

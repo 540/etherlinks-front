@@ -6,11 +6,13 @@
             <br/>
             Hash: {{ signature.hash }}
         </div>
-        <img :src="signature.image" class="screenshot center-block" />
+        <img :src="signature.image" class="screenshot center-block"/>
         <b-card show-footer>
             <b-btn v-b-toggle.htmlCollapse class="collapser">Mostrar HTML</b-btn>
-            <b-collapse id=htmlCollapse class="text-left collapse">
-                <b-card class="mb-2"><pre class="pre-scrollable"><code>{{ this.prettiedHtml }}</code></pre></b-card>
+            <b-collapse id=htmlCollapse  class="text-left collapse">
+                <b-card class="mb-2">
+                    <pre class="pre-scrollable"><code>{{ this.prettiedHtml }}</code></pre>
+                </b-card>
             </b-collapse>
             <small slot="footer" class="text-muted">
                 Creado el {{ this.formattedDate }}
@@ -65,22 +67,18 @@
     textarea {
         height: 150px;
     }
-
     .pre-scrollable {
         max-height: 350px;
         overflow-y: scroll;
         overflow-x: scroll;
     }
-
     .collapse {
         margin: 10px 0px;
     }
-
     .collapser {
         cursor: pointer;
         margin: 10px 0px;
     }
-
     .screenshot {
         margin: 30px 0px;
         width: 100%;
