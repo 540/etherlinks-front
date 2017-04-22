@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import List from '@/components/List'
-import Edit from '@/components/Edit'
+import Home from '@/components/Home'
+import Detail from '@/components/Detail'
 
 Vue.use(Router)
 
@@ -10,28 +10,20 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'list',
-      component: List,
+      name: 'home',
+      component: Home,
       props: true,
       meta: {
-        title: 'Tus recetas'
+        title: 'Inicio'
       }
     },
     {
-      path: '/recipe/:recipeId',
-      name: 'edit',
-      component: Edit,
+      path: '/detail',
+      name: 'detail',
+      component: Detail,
       props: true,
       meta: {
-        title: 'Editar receta'
-      }
-    },
-    {
-      path: '/recipe',
-      name: 'new',
-      component: Edit,
-      meta: {
-        title: 'Nueva receta'
+        title: 'Detalle'
       }
     }
   ]
