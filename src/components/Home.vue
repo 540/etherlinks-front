@@ -1,23 +1,46 @@
 <template>
     <div class="content">
         <span>Introduce el link al contenido que quieras asegurar</span>
-        <div class="form-group" :class="{'has-danger': errors.has('link') }">
-            <b-form-input v-model.trim="link" id="link" name="link" v-validate="'url'" type="text"
-                          data-vv-as="link"  :state="'warning'"></b-form-input>
+        <div class="form-group" :class="{'has-danger': errors.has('link')}">
+            <b-form-input v-model.trim="link" id="link" name="link" v-validate="'required|url|urlExists'" type="text"
+                          data-vv-as="link" :state="'warning'" :class="{'shake': shake}"></b-form-input>
             <b-tooltip content="La url no es válida" :show="showTooltip">
-                <i class="fa fa-times" aria-hidden="true" @onmouseover="'showTooltip: true'" @onmouseleave="'showTooltip: false'"></i>
+                <i class="fa fa-times" aria-hidden="true" @onmouseover="'showTooltip: true'"
+                   :class="{'shake': shake}" @onmouseleave="'showTooltip: false'"></i>
             </b-tooltip>
         </div>
-        <b-button type="submit" @click.prevent="" :variant="'secondary'" href="">Firmar</b-button>
+        <b-button type="submit" @click.prevent="handleSubmission" :variant="'secondary'" href="">Firmar</b-button>
     </div>
 </template>
 
 <script>
+  import SignatureRepository from '../model/SignatureRepository'
+  const signatureRepository = new SignatureRepository()
+
   export default {
     data: function () {
       return {
         link: '',
-        showTooltip: false
+        showTooltip: false,
+        shake: false
+      }
+    },
+    methods: {
+      handleSubmission: function () {
+        this.$validator.validateAll().then(() => {
+          const id = signatureRepository.new(this.link)
+          this.$router.push({name: 'detail', params: {id: id}})
+        }).catch(() => {
+          this.shake = false
+          this.$nextTick(function () {
+            this.shake = true
+          })
+        })
+      }
+    },
+    watch: {
+      link: function () {
+        this.shake = false
       }
     }
   }
@@ -75,5 +98,26 @@
     }
     .has-danger i {
         display: block;
+    }
+    .shake {
+        border-color: #8e4947;
+        animation: shake .5s;
+    }
+    @keyframes shake {
+        8%, 41% {
+            -webkit-transform: translateX(-10px);
+        }
+        25%, 58% {
+            -webkit-transform: translateX(10px);
+        }
+        75% {
+            -webkit-transform: translateX(-5px);
+        }
+        92% {
+            -webkit-transform: translateX(5px);
+        }
+        0%, 100% {
+            -webkit-transform: translateX(0);
+        }
     }
 </style>

@@ -8,4 +8,16 @@ export default class SignatureRepository {
       image: 'http://www.placehold.it/1280x720'
     }
   }
+
+  checkUrl (url) {
+    if (url === 'www.google.es') {
+      return true
+    }
+
+    return false
+  }
+
+  new (url) {
+    return '120ad2a'
+  }
 }

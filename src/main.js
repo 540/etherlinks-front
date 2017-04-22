@@ -5,15 +5,22 @@ import BootstrapVue from 'bootstrap-vue'
 import VeeValidate from 'vee-validate'
 import validationLocaleEs from '../node_modules/vee-validate/dist/locale/es'
 
+import SignatureRepository from './model/SignatureRepository'
 import './assets/main.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'font-awesome/scss/font-awesome.scss'
 
 import moment from 'moment'
+const signatureRepository = new SignatureRepository()
+
 moment.locale('es')
 
 Vue.use(BootstrapVue)
+
+VeeValidate.Validator.extend('urlExists', value => {
+  return signatureRepository.checkUrl(value)
+})
 
 VeeValidate.Validator.addLocale(validationLocaleEs)
 Vue.use(VeeValidate, {locale: 'es'})
