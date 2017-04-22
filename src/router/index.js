@@ -18,7 +18,7 @@ const router = new Router({
       }
     },
     {
-      path: '/detail',
+      path: '/:id',
       name: 'detail',
       component: Detail,
       props: true,
