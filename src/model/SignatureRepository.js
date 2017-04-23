@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default class SignatureRepository {
   findById (id) {
     return {
@@ -18,6 +20,7 @@ export default class SignatureRepository {
   }
 
   new (url) {
-    return '120ad2a'
+    return axios.post('https://etherlinks-backend.herokuapp.com/v1/signatures/', {'uri': url})
+      .then(response => response.data.id)
   }
 }

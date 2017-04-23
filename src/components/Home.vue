@@ -28,8 +28,9 @@
     methods: {
       handleSubmission: function () {
         this.$validator.validateAll().then(() => {
-          const id = signatureRepository.new(this.link)
-          this.$router.push({name: 'detail', params: {id: id}})
+          signatureRepository.new(this.link).then(id => {
+            this.$router.push({name: 'detail', params: {id: id}})
+          })
         }).catch(() => {
           this.shake = false
           this.$nextTick(function () {

@@ -18,9 +18,7 @@ moment.locale('es')
 
 Vue.use(BootstrapVue)
 
-VeeValidate.Validator.extend('urlExists', value => {
-  return signatureRepository.checkUrl(value)
-})
+VeeValidate.Validator.extend('urlExists', value => signatureRepository.checkUrl(value))
 
 VeeValidate.Validator.addLocale(validationLocaleEs)
 Vue.use(VeeValidate, {locale: 'es'})
